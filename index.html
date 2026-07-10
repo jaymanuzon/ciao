@@ -422,8 +422,13 @@ footer.site .claim{max-width:360px;color:#9aa4b6}
         </div>
 
         <div class="frage">
-          <label for="f-kontakt">Wie erreichen wir Sie? <span class="sub-hint">E-Mail oder Telefon — was Ihnen lieber ist.</span></label>
-          <input type="text" id="f-kontakt" name="Kontakt (E-Mail oder Telefon)" autocomplete="email">
+          <label for="f-email">Ihre E-Mail-Adresse <span class="sub-hint">An sie schicken wir die Empfangsbestätigung und die Terminvorschläge.</span></label>
+          <input type="email" id="f-email" name="E-Mail" autocomplete="email" inputmode="email">
+        </div>
+
+        <div class="frage">
+          <label for="f-telefon">Telefon <span class="sub-hint">Nur falls Ihnen ein Anruf lieber ist — freiwillig.</span></label>
+          <input type="tel" id="f-telefon" name="Telefon" autocomplete="tel">
         </div>
 
         <div class="frage">
@@ -435,15 +440,16 @@ footer.site .claim{max-width:360px;color:#9aa4b6}
       <!-- ---------- VERSAND ---------- -->
       <div class="senden" id="senden">
         <h2>Fertig? Dann geben Sie den Bogen ab.</h2>
-        <p>Ihre Antworten bleiben bis hierhin auf Ihrem Gerät. Beim Absenden öffnet sich Ihr E-Mail-Programm mit allen Antworten als vorbereiteter Text — Sie sehen also genau, was Sie verschicken, und drücken selbst auf „Senden".</p>
+        <p>Ein Klick genügt: Ihre Antworten gehen als E-Mail an uns, und Sie bekommen sofort eine Empfangsbestätigung an Ihre Adresse. Vorher können Sie sich alles noch einmal als Zusammenfassung ansehen.</p>
         <div class="btn-row no-print">
-          <button type="button" class="btn btn-primary nur-mit-js" id="btn-mail" style="display:none">Antworten per E-Mail senden</button>
+          <button type="button" class="btn btn-primary nur-mit-js" id="btn-absenden" style="display:none">Bogen jetzt absenden</button>
           <button type="button" class="btn btn-ghost nur-mit-js" id="btn-review" style="display:none">Erst die Zusammenfassung ansehen</button>
           <button type="button" class="btn btn-ghost nur-mit-js" id="btn-copy" style="display:none">Antworten kopieren</button>
           <a class="btn btn-primary nur-ohne-js" href="mailto:jay@aivantum.com?subject=Aufnahmebogen%20Wissensweitergabe&body=Guten%20Tag%2C%0A%0Aich%20habe%20den%20Aufnahmebogen%20ausgef%C3%BCllt%20(ausgedruckt%20bzw.%20notiert)%20und%20m%C3%B6chte%20mein%20Wissen%20weitergeben.%0A%0AName%3A%20%0AKontakt%3A%20%0A%0AViele%20Gr%C3%BC%C3%9Fe%0A">Per E-Mail melden</a>
         </div>
+        <p id="senden-status" aria-live="polite" style="display:none;margin-top:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:var(--r-sm);padding:11px 14px;font-size:.95rem;color:#f3ede2"></p>
         <pre id="zusammenfassung" aria-live="polite"></pre>
-        <p class="micro">Kein Formular-Server, kein Tracking, keine Cookies: Der Bogen schickt nichts von selbst ab. Wird die E-Mail sehr lang, nutzen Sie „Antworten kopieren" und fügen den Text selbst in eine E-Mail ein.</p>
+        <p class="micro">Beim Absenden gehen Ihre Antworten über unseren Formular-Endpunkt als E-Mail an uns — kein Tracking, keine Cookies, keine Weitergabe an Dritte (Details in der <a href="https://oldschool.aivantum.com/datenschutz.html" style="color:#b9c2d2">Datenschutzerklärung</a>). Bis dahin bleiben sie ausschließlich auf Ihrem Gerät.</p>
         <p class="micro nur-ohne-js">Ohne JavaScript: Drucken Sie die ausgefüllte Seite (Strg+P bzw. ⌘P) und bringen Sie sie zum ersten Gespräch mit — oder melden Sie sich formlos über den Knopf oben.</p>
       </div>
 
@@ -531,11 +537,13 @@ document.documentElement.className = 'js';
   }
 
   // --- Knöpfe ---
-  var btnMail = document.getElementById('btn-mail');
+  var btnAbsenden = document.getElementById('btn-absenden');
   var btnReview = document.getElementById('btn-review');
   var btnCopy = document.getElementById('btn-copy');
   var summary = document.getElementById('zusammenfassung');
-  [btnMail, btnReview, btnCopy].forEach(function(b){ if(b) b.style.display = 'inline-flex'; });
+  var status = document.getElementById('senden-status');
+  [btnAbsenden, btnReview, btnCopy].forEach(function(b){ if(b) b.style.display = 'inline-flex'; });
+  function zeige(msg){ if(status){ status.textContent = msg; status.style.display = 'block'; } }
 
   if(btnReview) btnReview.addEventListener('click', function(){
     summary.textContent = sammeln();
@@ -543,16 +551,40 @@ document.documentElement.className = 'js';
     btnReview.textContent = summary.classList.contains('show') ? 'Zusammenfassung ausblenden' : 'Erst die Zusammenfassung ansehen';
   });
 
-  if(btnMail) btnMail.addEventListener('click', function(){
-    var body = sammeln();
-    var url = 'mailto:jay@aivantum.com?subject=' + encodeURIComponent('Aufnahmebogen Wissensweitergabe') + '&body=' + encodeURIComponent(body);
-    if(url.length > 1800){
-      summary.textContent = body;
-      summary.classList.add('show');
-      alert('Ihre Antworten sind ausführlich — wunderbar! Für den Versand: Bitte nutzen Sie den Knopf „Antworten kopieren" und fügen Sie den Text in eine E-Mail an jay@aivantum.com ein.');
+  if(btnAbsenden) btnAbsenden.addEventListener('click', function(){
+    var email = (document.getElementById('f-email').value || '').trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      zeige('Bitte tragen Sie in Abschnitt 4 Ihre E-Mail-Adresse ein — an sie geht die Empfangsbestätigung.');
+      document.getElementById('f-email').focus();
       return;
     }
-    window.location.href = url;
+    btnAbsenden.disabled = true; btnAbsenden.textContent = 'Wird gesendet …';
+    fetch('https://aivantum-check.aivantum.workers.dev/kontakt', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        art: 'ciao',
+        email: email,
+        name: (document.getElementById('f-name').value || '').trim(),
+        msg: sammeln(),
+        source: location.hostname || 'ciao.aivantum.com',
+        website: ''
+      })
+    }).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return {ok: r.ok, d: d}; }); })
+      .then(function(res){
+        if(res.ok){
+          zeige('Danke! Ihr Bogen ist bei uns angekommen. Eine Bestätigung ist an ' + email + ' unterwegs — wir melden uns für die Terminplanung der Gespräche.');
+          btnAbsenden.textContent = 'Bogen abgesendet ✓';
+          try { localStorage.removeItem(KEY); } catch(e){}
+        } else {
+          zeige('Das hat gerade nicht geklappt' + (res.d && res.d.error === 'rate_limited' ? ' (zu viele Versuche — bitte in einer Stunde erneut)' : '') + '. Ihre Antworten sind weiter auf diesem Gerät gespeichert — nutzen Sie „Antworten kopieren" und schicken Sie den Text an jay@aivantum.com.');
+          btnAbsenden.disabled = false; btnAbsenden.textContent = 'Bogen jetzt absenden';
+        }
+      })
+      .catch(function(){
+        zeige('Keine Verbindung zum Formular-Dienst. Ihre Antworten sind weiter auf diesem Gerät gespeichert — nutzen Sie „Antworten kopieren" und schicken Sie den Text an jay@aivantum.com.');
+        btnAbsenden.disabled = false; btnAbsenden.textContent = 'Bogen jetzt absenden';
+      });
   });
 
   if(btnCopy) btnCopy.addEventListener('click', function(){
