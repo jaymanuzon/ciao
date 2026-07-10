@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oldschool — Aufnahmebogen für Wissensträger | Wissen weitergeben, bevor Sie gehen</title>
+<meta name="description" content="Sie kennen die Griffe, die nirgends stehen. Mit diesem Aufnahmebogen beginnt die Sicherung Ihres Erfahrungswissens — in Ihrem Tempo, ohne falsche Antworten.">
+<style>
+:root{
+  /* Basis-Token-Block (Vantum/Public), Oldschool-Akzent — identisch zur Landing */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  --bg:#fcf6ea; --surface:#ffffff; --surface-2:#f5ecdb; --surface-3:#f0e4cf;
+  --ink:#182b4b; --ink-soft:#42506a; --muted:#7a6f5c;
+  --navy:#182b4b; --navy-deep:#101f38;
+  --old:#a75d2b; --old-deep:#7a3f18; --old-bright:#c67a3e; --old-soft:#f4e6d4;
+  --line:#e6d9c1; --line-strong:#d8c6a6;
+  --ok:#2fa55f; --ok-soft:#e5f3ea; --ok-text:#1f7a45;
+  --warn:#b3791b; --warn-soft:#faf1dc;
+  --r-sm:10px; --r-md:16px; --r-lg:22px; --r-pill:999px;
+  --shadow:0 1px 2px rgba(24,43,75,.05), 0 10px 26px -16px rgba(24,43,75,.18);
+  --shadow-lift:0 2px 8px rgba(24,43,75,.08), 0 26px 50px -22px rgba(24,43,75,.26);
+  --maxw-narrow:760px; --maxw:1040px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
+  font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:var(--old-deep);text-underline-offset:2px}
+h1,h2,h3{font-family:var(--font-display);color:var(--navy);line-height:1.18;font-weight:700;letter-spacing:-.01em}
+h1{font-size:clamp(1.8rem,5vw,2.7rem);margin:.2em 0}
+h2{font-size:clamp(1.35rem,3.4vw,1.85rem);margin:0 0 .5em}
+h3{font-size:1.1rem;margin:0 0 .35em}
+p{margin:0 0 1em}
+.wrap{max-width:var(--maxw-narrow);margin:0 auto;padding:0 22px}
+em{font-style:italic;color:var(--old-deep)}
+.section{padding:48px 0;border-top:1px solid var(--line)}
+.section:first-of-type{border-top:none}
+.eyebrow{display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--old);margin:0 0 .6em}
+.lead{font-size:1.14rem;color:var(--ink-soft);line-height:1.55}
+
+/* ---- Kopfzeile (Muster der Landing) ---- */
+header.top{position:sticky;top:0;z-index:20;background:rgba(252,246,234,.92);
+  backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  max-width:var(--maxw);margin:0 auto;padding:10px 22px}
+.brandlink{display:inline-flex;align-items:center;text-decoration:none}
+.backlink{font-size:.92rem;white-space:nowrap}
+
+/* ---- Buttons ---- */
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:1rem;
+  text-decoration:none;padding:14px 24px;border-radius:var(--r-pill);border:1.5px solid transparent;
+  cursor:pointer;transition:transform .08s ease, box-shadow .15s ease;line-height:1;font-family:var(--font-body)}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--old);color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{background:var(--old-deep);box-shadow:var(--shadow-lift)}
+.btn-ghost{background:transparent;color:var(--old-deep);border-color:var(--line-strong)}
+.btn-ghost:hover{background:var(--old-soft);border-color:var(--old)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+/* ---- Hero ---- */
+.hero{padding:56px 0 14px}
+.hero .kicker{color:var(--old);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.78rem}
+.hero .sub{font-size:1.16rem;color:var(--ink-soft);max-width:640px;margin:.4em 0 1.1em;line-height:1.55}
+.calm{margin-top:26px;background:var(--surface);border:1px solid var(--line);
+  border-left:5px solid var(--old);border-radius:var(--r-md);padding:18px 20px;box-shadow:var(--shadow)}
+.calm .lbl{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--old);margin-bottom:10px}
+.calm ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.calm li{position:relative;padding-left:26px;font-size:1rem;color:var(--ink)}
+.calm li::before{content:"";position:absolute;left:0;top:.5em;width:11px;height:11px;border-radius:3px;background:var(--old)}
+
+/* Ablauf-Schritte */
+.flow{counter-reset:step;list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.flow li{counter-increment:step;position:relative;padding:2px 0 0 54px;min-height:40px}
+.flow li::before{content:counter(step);position:absolute;left:0;top:0;width:38px;height:38px;
+  border-radius:50%;background:var(--old);color:#fff;font-family:var(--font-display);
+  font-size:1.15rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.flow li h3{margin-bottom:.2em}
+.flow li p{font-size:.98rem;margin:0}
+
+/* ---- Formular ---- */
+form.bogen{margin-top:8px}
+fieldset{border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);
+  padding:24px 22px 18px;margin:0 0 26px;box-shadow:var(--shadow);min-inline-size:0}
+legend{float:left;width:100%;padding:0;margin:0 0 6px}
+legend + *{clear:both}
+legend .step-tag{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff;background:var(--old);border-radius:var(--r-pill);padding:4px 12px;margin-bottom:8px}
+legend h2{margin:0;font-size:1.35rem}
+.f-hint{font-size:.95rem;color:var(--muted);margin:2px 0 16px}
+.frage{border-top:1px dashed var(--line);padding:16px 0 6px}
+.frage:first-of-type{border-top:none}
+.frage > label, .frage > .q-label{display:block;font-weight:600;color:var(--navy);margin-bottom:8px;font-size:1.02rem}
+.frage .sub-hint{display:block;font-weight:400;color:var(--muted);font-size:.9rem;margin-top:2px}
+input[type=text],input[type=email],input[type=tel],textarea{
+  width:100%;font:inherit;color:var(--ink);background:var(--bg);
+  border:1.5px solid var(--line-strong);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:8px}
+input:focus,textarea:focus{outline:3px solid var(--old-soft);border-color:var(--old)}
+textarea{min-height:120px;resize:vertical}
+.opts{display:flex;gap:10px;flex-wrap:wrap}
+.opts.col{flex-direction:column;gap:8px}
+.opts label{display:inline-flex;align-items:flex-start;gap:10px;font-size:.98rem;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:11px 16px;cursor:pointer;line-height:1.4}
+.opts label:hover{border-color:var(--old)}
+.opts input{accent-color:var(--old);width:1.15em;height:1.15em;margin-top:.15em;flex-shrink:0}
+.tasklist{display:grid;gap:8px;counter-reset:task}
+.tasklist .taskrow{position:relative;padding-left:34px}
+.tasklist .taskrow::before{counter-increment:task;content:counter(task) ".";position:absolute;left:6px;top:12px;
+  font-family:var(--font-display);font-weight:700;color:var(--old-deep)}
+.doppelt{background:var(--warn-soft);border:1px solid var(--line-strong);border-radius:var(--r-sm);
+  padding:12px 16px;font-size:.92rem;color:var(--ink-soft);margin:14px 0 4px}
+
+/* Versand-Block */
+.senden{background:var(--navy);color:#f3ede2;border-radius:var(--r-lg);padding:30px 28px;box-shadow:var(--shadow-lift)}
+.senden h2{color:#fff}
+.senden p{color:#e7ddcd}
+.senden .micro{font-size:.84rem;color:#b9c2d2;margin:14px 0 0}
+.senden .btn-ghost{color:#fff;border-color:rgba(255,255,255,.4)}
+.senden .btn-ghost:hover{background:rgba(255,255,255,.1)}
+#zusammenfassung{display:none;margin-top:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);
+  border-radius:var(--r-sm);padding:14px 16px;white-space:pre-wrap;font-size:.88rem;color:#e7ddcd;max-height:340px;overflow:auto}
+.js #zusammenfassung.show{display:block}
+#save-note{display:none;font-size:.85rem;color:var(--ok-text);background:var(--ok-soft);
+  border-radius:var(--r-pill);padding:6px 14px;margin-left:4px}
+.js #save-note.show{display:inline-block}
+.nur-ohne-js{display:block}
+.js .nur-ohne-js{display:none}
+.nur-mit-js{display:none}
+.js .nur-mit-js{display:block}
+
+/* Fortschritts-Chips (JS-Anreicherung) */
+#fortschritt{display:none;position:sticky;top:62px;z-index:15;background:rgba(252,246,234,.95);
+  border-bottom:1px solid var(--line);padding:8px 0}
+.js #fortschritt{display:block}
+#fortschritt .wrap{display:flex;gap:8px;flex-wrap:wrap}
+#fortschritt a{font-size:.8rem;text-decoration:none;color:var(--muted);border:1px solid var(--line);
+  border-radius:var(--r-pill);padding:5px 13px;background:var(--surface)}
+#fortschritt a.aktiv{background:var(--old);border-color:var(--old);color:#fff;font-weight:700}
+
+/* Footer */
+footer.site{background:var(--navy-deep);color:#c8cfdc;padding:34px 0;font-size:.86rem;margin-top:56px}
+footer.site .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-start;max-width:var(--maxw)}
+footer.site a{color:#dfe4ec}
+footer.site .fnav{display:flex;gap:18px;flex-wrap:wrap}
+footer.site .claim{max-width:360px;color:#9aa4b6}
+
+@media (max-width:560px){
+  body{font-size:17px}
+  .section{padding:40px 0}
+  .opts{flex-direction:column}
+  .backlink span{display:none}
+}
+@media print{
+  header.top,#fortschritt,.senden .btn-row,.no-print,footer.site .fnav{display:none}
+  body{background:#fff;color:#000;font-size:12pt}
+  fieldset{box-shadow:none;break-inside:avoid;border-color:#999}
+  input[type=text],input[type=email],input[type=tel],textarea{border:1px solid #999;background:#fff;min-height:2.2em}
+  textarea{min-height:6em}
+  .senden{background:#fff;color:#000;border:1px solid #999}
+  .senden h2,.senden p{color:#000}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="topbar">
+    <a class="brandlink" href="https://oldschool.aivantum.com/" aria-label="Oldschool — zur Hauptseite">
+      <svg width="220" height="42" viewBox="0 0 220 42" role="img" aria-label="Oldschool — Wissen, das bleibt">
+        <text x="0" y="25" font-family="Georgia, serif" font-size="25" font-weight="700" fill="#182b4b" letter-spacing="-.3">Oldschool</text>
+        <g>
+          <rect x="1" y="31" width="24" height="4" fill="#a75d2b"/>
+          <rect x="27" y="31" width="34" height="4" fill="#a75d2b"/>
+          <rect x="63" y="31" width="20" height="4" fill="#a75d2b"/>
+          <rect x="85" y="31" width="30" height="4" fill="#a75d2b"/>
+          <rect x="117" y="31" width="18" height="4" fill="#a75d2b"/>
+        </g>
+        <text x="1" y="40" font-family="system-ui, sans-serif" font-size="8.5" font-weight="700" letter-spacing="2.4" fill="#7a6f5c">WISSEN, DAS BLEIBT</text>
+      </svg>
+    </a>
+    <a class="backlink" href="https://oldschool.aivantum.com/">← <span>Zur </span>Hauptseite</a>
+  </div>
+</header>
+
+<nav id="fortschritt" aria-label="Abschnitte des Bogens">
+  <div class="wrap">
+    <a href="#teil-a">1 · Person &amp; Zeit</a>
+    <a href="#teil-b">2 · Aufgaben</a>
+    <a href="#teil-c">3 · Erfahrung</a>
+    <a href="#teil-d">4 · Abschluss</a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker">Aufnahmebogen für Wissensträger</span>
+    <h1>Sie kennen die Griffe,<br>die nirgends stehen.</h1>
+    <p class="sub">Nach vielen Berufsjahren wissen Sie Dinge, die in keinem Handbuch stehen: warum eine Regel so ist, wann sie nicht gilt, was man einen Neuen am ersten Tag zeigen müsste. Dieser Bogen ist der erste Schritt, dieses Wissen weiterzugeben — <em>bevor</em> es mit Ihnen geht.</p>
+
+    <div class="calm">
+      <div class="lbl">Bevor Sie anfangen — drei Zusagen</div>
+      <ul>
+        <li><b>Es gibt keine falschen Antworten.</b> Der Bogen ist der Anfang, nicht die Prüfung. Lücken sind ausdrücklich erlaubt.</li>
+        <li><b>Stichworte reichen.</b> Die Geschichten dahinter erzählen Sie später im Gespräch — dafür ist das Gespräch da.</li>
+        <li><b>Rund 15 Minuten.</b> Sie können jederzeit aufhören und später weitermachen.</li>
+      </ul>
+    </div>
+    <p class="nur-mit-js" style="font-size:.9rem;color:var(--muted);margin-top:10px">Ihre Eingaben werden automatisch auf diesem Gerät zwischengespeichert — nichts wird an einen Server geschickt.</p>
+    <p class="nur-ohne-js" style="font-size:.9rem;color:var(--muted);margin-top:10px">Tipp: Sie können diese Seite auch ausdrucken und in Ruhe auf Papier ausfüllen.</p>
+  </div>
+</section>
+
+<!-- ===================== SO LÄUFT ES AB ===================== -->
+<section class="section" id="ablauf">
+  <div class="wrap">
+    <span class="eyebrow">So läuft es ab</span>
+    <h2>Der Bogen bereitet vor. Das Gespräch hebt den Schatz.</h2>
+    <p class="lead">Erfahrungswissen lässt sich nicht in Formularfelder tippen — das versucht dieser Bogen gar nicht erst. Er sammelt die Landkarte: Ihre Aufgaben, Ihre Werkzeuge, die Stellen, an denen es ohne Sie hakt. Die Geschichten dahinter holen wir gemeinsam, im Gespräch.</p>
+    <ol class="flow">
+      <li>
+        <h3>Heute: dieser Bogen</h3>
+        <p>Sie tragen zusammen, was Ihnen einfällt — Stichworte genügen. Manches fragen wir bewusst doppelt: unterschiedliche Fragen wecken unterschiedliche Erinnerungen.</p>
+      </li>
+      <li>
+        <h3>Dann: zwei bis drei Gespräche</h3>
+        <p>Sie erzählen, wir fragen nach — nach dem Warum, den Ausnahmen, den Grenzfällen. Die Themen kennen Sie vorab, es gibt kein leeres Blatt.</p>
+      </li>
+      <li>
+        <h3>Am Ende: Ihre Knowledge-Map</h3>
+        <p>Eine Karte Ihres Urteilswissens — die Regel verbunden mit ihrer Ausnahme und ihrem Warum. Ihr Wissen bleibt im Haus, mit Ihrem Namen daran.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== FORMULAR ===================== -->
+<section class="section" id="bogen">
+  <div class="wrap">
+    <span class="eyebrow">Der Bogen</span>
+    <h2>Vier Abschnitte, in Ihrem Tempo.</h2>
+    <p class="lead" style="margin-bottom:26px">Alle Felder sind freiwillig. Was Sie leer lassen, besprechen wir einfach im Gespräch.</p>
+
+    <form class="bogen" id="aufnahme-form" onsubmit="return false">
+
+      <!-- ---------- TEIL A ---------- -->
+      <fieldset id="teil-a">
+        <legend>
+          <span class="step-tag">Abschnitt 1 von 4</span>
+          <h2>Zu Ihnen und Ihrem Zeitplan</h2>
+        </legend>
+        <p class="f-hint">Damit wir wissen, mit wem wir sprechen — und wie viel Zeit uns bleibt.</p>
+
+        <div class="frage">
+          <label for="f-name">Ihr Name</label>
+          <input type="text" id="f-name" name="Name" autocomplete="name">
+        </div>
+
+        <div class="frage">
+          <label for="f-rolle">Ihre Rolle und Ihr Bereich <span class="sub-hint">Zum Beispiel: „Sachbearbeitung Einkauf" oder „Schichtführer Anlage 3"</span></label>
+          <input type="text" id="f-rolle" name="Rolle und Bereich">
+        </div>
+
+        <div class="frage">
+          <label for="f-jahre">Wie viele Jahre machen Sie diese Arbeit schon?</label>
+          <input type="text" id="f-jahre" name="Jahre in der Aufgabe" inputmode="numeric" style="max-width:200px">
+        </div>
+
+        <div class="frage">
+          <span class="q-label">Wann scheiden Sie aus — oder sind Sie schon im Ruhestand?</span>
+          <div class="opts col">
+            <label><input type="radio" name="Austrittshorizont" value="unter 6 Monate"> In weniger als 6 Monaten</label>
+            <label><input type="radio" name="Austrittshorizont" value="6 bis 12 Monate"> In 6 bis 12 Monaten</label>
+            <label><input type="radio" name="Austrittshorizont" value="1 bis 2 Jahre"> In 1 bis 2 Jahren</label>
+            <label><input type="radio" name="Austrittshorizont" value="mehr als 2 Jahre"> In mehr als 2 Jahren</label>
+            <label><input type="radio" name="Austrittshorizont" value="bereits im Ruhestand"> Ich bin bereits im Ruhestand</label>
+          </div>
+        </div>
+
+        <div class="frage">
+          <span class="q-label">Wie gut ist Ihr Wissen heute schon dokumentiert? <span class="sub-hint">Ihre ehrliche Einschätzung — sie hilft uns, die richtigen Schwerpunkte zu setzen.</span></span>
+          <div class="opts col">
+            <label><input type="radio" name="Dokumentations-Stand" value="1 - fast alles dokumentiert"> Fast alles ist dokumentiert und aktuell</label>
+            <label><input type="radio" name="Dokumentations-Stand" value="2 - das meiste auffindbar"> Das meiste steht irgendwo — die Kollegen finden es</label>
+            <label><input type="radio" name="Dokumentations-Stand" value="3 - das Warum fehlt"> Teils dokumentiert, aber das „Warum" steht nirgends</label>
+            <label><input type="radio" name="Dokumentations-Stand" value="4 - vieles nur bei mir"> Vieles weiß nur ich — die Vertretung ruft mich an</label>
+            <label><input type="radio" name="Dokumentations-Stand" value="5 - ohne mich steht es still"> Ohne mich stünde mein Bereich in Teilen still</label>
+          </div>
+        </div>
+
+        <div class="frage">
+          <span class="q-label">Warum möchten Sie Ihr Wissen weitergeben? <span class="sub-hint">Mehrfach ankreuzen ist erlaubt.</span></span>
+          <div class="opts col">
+            <label><input type="checkbox" name="Motivation" value="Wissen soll weiterleben"> Mein Wissen soll weiterleben, nicht verschwinden</label>
+            <label><input type="checkbox" name="Motivation" value="Nachfolger unterstuetzen"> Ich will meiner Nachfolge einen guten Start geben</label>
+            <label><input type="checkbox" name="Motivation" value="Ordentlich abschliessen"> Ich möchte mein Berufsleben ordentlich abschließen</label>
+            <label><input type="checkbox" name="Motivation" value="Werde staendig gefragt"> Ich werde ständig gefragt und will das mal strukturieren</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ---------- TEIL B ---------- -->
+      <fieldset id="teil-b">
+        <legend>
+          <span class="step-tag">Abschnitt 2 von 4</span>
+          <h2>Ihre Aufgaben — erst die Liste, dann ein Blick in die Tiefe</h2>
+        </legend>
+        <p class="f-hint">Erst sammeln, dann vertiefen: Nennen Sie bis zu fünf Aufgaben in Stichworten. Danach schauen wir uns nur die wichtigste genauer an — die übrigen kommen im Gespräch dran.</p>
+
+        <div class="frage">
+          <span class="q-label">Ihre wichtigsten Aufgaben <span class="sub-hint">Die wichtigste zuerst. Stichworte genügen — „Monatsabschluss", „Lieferantenreklamationen", „Anlage anfahren".</span></span>
+          <div class="tasklist">
+            <div class="taskrow"><input type="text" name="Aufgabe 1" aria-label="Aufgabe 1 (die wichtigste)"></div>
+            <div class="taskrow"><input type="text" name="Aufgabe 2" aria-label="Aufgabe 2"></div>
+            <div class="taskrow"><input type="text" name="Aufgabe 3" aria-label="Aufgabe 3"></div>
+            <div class="taskrow"><input type="text" name="Aufgabe 4" aria-label="Aufgabe 4"></div>
+            <div class="taskrow"><input type="text" name="Aufgabe 5" aria-label="Aufgabe 5"></div>
+          </div>
+        </div>
+
+        <div class="frage">
+          <label for="f-schritte">Nehmen Sie Ihre <b>wichtigste</b> Aufgabe: Wie läuft sie ab — in drei bis sechs Schritten? <span class="sub-hint">So, wie Sie es einem neuen Kollegen am Telefon erklären würden. „1. … 2. … 3. …"</span></label>
+          <textarea id="f-schritte" name="Ablauf der wichtigsten Aufgabe (3-6 Schritte)" placeholder="1.&#10;2.&#10;3."></textarea>
+        </div>
+
+        <div class="frage">
+          <label for="f-schwer">Welcher dieser Schritte ist der schwierigste — und woran merkt man, dass es gerade schiefgeht?</label>
+          <input type="text" id="f-schwer" name="Schwierigster Schritt und Warnzeichen">
+        </div>
+
+        <div class="frage">
+          <label for="f-tools">Welche Programme, Werkzeuge oder Unterlagen brauchen Sie dafür?</label>
+          <input type="text" id="f-tools" name="Programme, Werkzeuge, Unterlagen">
+        </div>
+
+        <div class="frage">
+          <label for="f-uebergabe">Von wem übernehmen Sie dabei etwas — und an wen geben Sie weiter? <span class="sub-hint">Rollen oder Abteilungen genügen, keine Namen nötig.</span></label>
+          <input type="text" id="f-uebergabe" name="Uebernahme von / Weitergabe an">
+        </div>
+
+        <div class="frage">
+          <label for="f-kniff">Gibt es einen Kniff oder eine Abkürzung, die nicht im Handbuch steht? <span class="sub-hint">Nur ein Stichwort — die Geschichte dazu erzählen Sie im Gespräch.</span></label>
+          <input type="text" id="f-kniff" name="Kniff / Abkuerzung (Stichwort)">
+        </div>
+
+        <div class="frage">
+          <label for="f-selten">Was passiert in Ihrer Arbeit nur einmal im Jahr — oder noch seltener? <span class="sub-hint">Jahresabschluss, Revision, der eine Sonderfall im Winter … Gerade das Seltene geht am schnellsten verloren.</span></label>
+          <input type="text" id="f-selten" name="Seltene / saisonale Vorgaenge">
+        </div>
+
+        <div class="frage">
+          <label for="f-ablage">Wo liegt zu Ihren Aufgaben schon etwas? <span class="sub-hint">Nur die Orte: Ordner, Laufwerk, Wiki, der Schrank im Büro. Nichts abtippen!</span></label>
+          <input type="text" id="f-ablage" name="Bestehende Ablageorte">
+        </div>
+      </fieldset>
+
+      <!-- ---------- TEIL C ---------- -->
+      <fieldset id="teil-c">
+        <legend>
+          <span class="step-tag">Abschnitt 3 von 4</span>
+          <h2>Ihre Erfahrung — nur die Überschriften</h2>
+        </legend>
+        <p class="f-hint">Hier reicht je ein Satz oder ein Titel. Diese Antworten werden die Kapitel unserer Gespräche — erzählt wird dann, nicht jetzt.</p>
+
+        <div class="frage">
+          <label for="f-dreimonate">Stellen Sie sich vor, Sie wären ab morgen drei Monate nicht erreichbar. Was geht als Erstes schief?</label>
+          <input type="text" id="f-dreimonate" name="Drei-Monats-Frage: was geht zuerst schief">
+        </div>
+
+        <div class="frage">
+          <label for="f-situation">Die schwierigste Situation, die Sie gemeistert haben — nur der Titel. <span class="sub-hint">Zum Beispiel: „Der Lieferstopp 2019" oder „Als die Anlage im Sommer zweimal stand".</span></label>
+          <input type="text" id="f-situation" name="Schwierigste gemeisterte Situation (Titel)">
+        </div>
+
+        <div class="frage">
+          <label for="f-regel">Eine ungeschriebene Regel in Ihrem Bereich — etwas, das jeder Erfahrene weiß, aber nirgends steht.</label>
+          <input type="text" id="f-regel" name="Ungeschriebene Regel">
+        </div>
+
+        <div class="frage">
+          <label for="f-erstertag">Wenn Sie Ihrer Nachfolge nur <b>einen Tag</b> etwas zeigen könnten: Was wäre das?</label>
+          <input type="text" id="f-erstertag" name="Ein-Tag-Briefing fuer die Nachfolge">
+        </div>
+
+        <div class="frage">
+          <label for="f-haeufig">Welche Frage stellen Ihnen die Kolleginnen und Kollegen am häufigsten?</label>
+          <input type="text" id="f-haeufig" name="Haeufigste Kollegen-Frage">
+        </div>
+
+        <div class="doppelt">
+          <b>Warum sich manches doppelt anfühlt:</b> Die Frage nach den drei Monaten und die nach dem einen Tag zielen auf dasselbe Wissen — aus zwei Richtungen. Das ist Absicht: Unterschiedliche Fragen wecken unterschiedliche Erinnerungen.
+        </div>
+      </fieldset>
+
+      <!-- ---------- TEIL D ---------- -->
+      <fieldset id="teil-d">
+        <legend>
+          <span class="step-tag">Abschnitt 4 von 4</span>
+          <h2>Zum Abschluss: die Gespräche</h2>
+        </legend>
+        <p class="f-hint">Die eigentliche Wissenssicherung passiert im Gespräch — zwei bis drei Termine über etwa drei Wochen.</p>
+
+        <div class="frage">
+          <span class="q-label">Zwei bis drei Gesprächstermine über rund drei Wochen — passt das grundsätzlich für Sie?</span>
+          <div class="opts">
+            <label><input type="radio" name="Verfuegbarkeit" value="ja"> Ja, das passt</label>
+            <label><input type="radio" name="Verfuegbarkeit" value="eher ja"> Eher ja, hängt an den Terminen</label>
+            <label><input type="radio" name="Verfuegbarkeit" value="schwierig"> Schwierig — lassen Sie uns darüber sprechen</label>
+          </div>
+        </div>
+
+        <div class="frage">
+          <span class="q-label">Wie erzählen Sie am liebsten?</span>
+          <div class="opts col">
+            <label><input type="radio" name="Gespraechsform" value="am Arbeitsplatz zeigen"> Am Arbeitsplatz — zeigen ist einfacher als beschreiben</label>
+            <label><input type="radio" name="Gespraechsform" value="im Gespraech erzaehlen"> Im ruhigen Gespräch, gern bei einem Kaffee</label>
+            <label><input type="radio" name="Gespraechsform" value="beides"> Am liebsten beides</label>
+          </div>
+        </div>
+
+        <div class="frage">
+          <label for="f-kontakt">Wie erreichen wir Sie? <span class="sub-hint">E-Mail oder Telefon — was Ihnen lieber ist.</span></label>
+          <input type="text" id="f-kontakt" name="Kontakt (E-Mail oder Telefon)" autocomplete="email">
+        </div>
+
+        <div class="frage">
+          <label for="f-anmerkung">Möchten Sie uns noch etwas mitgeben?</label>
+          <textarea id="f-anmerkung" name="Anmerkungen" style="min-height:90px"></textarea>
+        </div>
+      </fieldset>
+
+      <!-- ---------- VERSAND ---------- -->
+      <div class="senden" id="senden">
+        <h2>Fertig? Dann geben Sie den Bogen ab.</h2>
+        <p>Ihre Antworten bleiben bis hierhin auf Ihrem Gerät. Beim Absenden öffnet sich Ihr E-Mail-Programm mit allen Antworten als vorbereiteter Text — Sie sehen also genau, was Sie verschicken, und drücken selbst auf „Senden".</p>
+        <div class="btn-row no-print">
+          <button type="button" class="btn btn-primary nur-mit-js" id="btn-mail" style="display:none">Antworten per E-Mail senden</button>
+          <button type="button" class="btn btn-ghost nur-mit-js" id="btn-review" style="display:none">Erst die Zusammenfassung ansehen</button>
+          <button type="button" class="btn btn-ghost nur-mit-js" id="btn-copy" style="display:none">Antworten kopieren</button>
+          <a class="btn btn-primary nur-ohne-js" href="mailto:jay@aivantum.com?subject=Aufnahmebogen%20Wissensweitergabe&body=Guten%20Tag%2C%0A%0Aich%20habe%20den%20Aufnahmebogen%20ausgef%C3%BCllt%20(ausgedruckt%20bzw.%20notiert)%20und%20m%C3%B6chte%20mein%20Wissen%20weitergeben.%0A%0AName%3A%20%0AKontakt%3A%20%0A%0AViele%20Gr%C3%BC%C3%9Fe%0A">Per E-Mail melden</a>
+        </div>
+        <pre id="zusammenfassung" aria-live="polite"></pre>
+        <p class="micro">Kein Formular-Server, kein Tracking, keine Cookies: Der Bogen schickt nichts von selbst ab. Wird die E-Mail sehr lang, nutzen Sie „Antworten kopieren" und fügen den Text selbst in eine E-Mail ein.</p>
+        <p class="micro nur-ohne-js">Ohne JavaScript: Drucken Sie die ausgefüllte Seite (Strg+P bzw. ⌘P) und bringen Sie sie zum ersten Gespräch mit — oder melden Sie sich formlos über den Knopf oben.</p>
+      </div>
+
+    </form>
+
+    <p style="margin-top:26px;font-size:.92rem;color:var(--muted)">
+      Sie sind Entscheiderin oder Entscheider und fragen sich, wie die Aufnahme bei Ihren Schlüsselpersonen abliefe? Genau so beginnt sie — mit diesem Bogen. <a href="https://oldschool.aivantum.com/">Zurück zur Hauptseite</a> oder direkt <a href="https://oldschool.aivantum.com/#gespraech">ein Erstgespräch anfragen</a>.
+    </p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <div style="font-family:var(--font-display);font-size:1.2rem;color:#fff;font-weight:700">Oldschool</div>
+      <div class="claim">Wissen, das bleibt. Wir sichern das Auslegungswissen hinter der Regel, solange die Menschen noch da sind, die es tragen.</div>
+    </div>
+    <nav class="fnav" aria-label="Rechtliches">
+      <a href="https://oldschool.aivantum.com/">Hauptseite</a>
+      <a href="https://oldschool.aivantum.com/impressum.html">Impressum</a>
+      <a href="https://oldschool.aivantum.com/datenschutz.html">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// Progressive Enhancement: der Bogen ist ohne JS vollständig lesbar, ausfüllbar und druckbar.
+document.documentElement.className = 'js';
+(function(){
+  var form = document.getElementById('aufnahme-form');
+  if(!form) return;
+  var KEY = 'oldschool-aufnahme-v1';
+
+  // --- Zwischenspeichern auf dem Gerät (kein Server) ---
+  function alleFelder(){ return form.querySelectorAll('input[type=text],input[type=email],input[type=tel],textarea,input[type=radio],input[type=checkbox]'); }
+  function speichern(){
+    var data = {};
+    alleFelder().forEach(function(el){
+      var id = el.id || (el.name + '=' + el.value);
+      if(el.type === 'radio' || el.type === 'checkbox'){ data[id] = el.checked; }
+      else { data[id] = el.value; }
+    });
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){}
+    var note = document.getElementById('save-note');
+    if(note){ note.classList.add('show'); }
+  }
+  function laden(){
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch(e){}
+    if(!raw) return;
+    var data; try { data = JSON.parse(raw); } catch(e){ return; }
+    alleFelder().forEach(function(el){
+      var id = el.id || (el.name + '=' + el.value);
+      if(!(id in data)) return;
+      if(el.type === 'radio' || el.type === 'checkbox'){ el.checked = !!data[id]; }
+      else { el.value = data[id]; }
+    });
+  }
+  laden();
+  form.addEventListener('input', speichern);
+  form.addEventListener('change', speichern);
+
+  // --- Antworten einsammeln ---
+  function sammeln(){
+    var zeilen = ['AUFNAHMEBOGEN WISSENSWEITERGABE — OLDSCHOOL', ''];
+    var fieldsets = form.querySelectorAll('fieldset');
+    fieldsets.forEach(function(fs){
+      var titel = fs.querySelector('legend h2');
+      zeilen.push('=== ' + (titel ? titel.textContent : '') + ' ===');
+      var gesehen = {};
+      fs.querySelectorAll('input[type=text],input[type=email],input[type=tel],textarea').forEach(function(el){
+        if(el.value.trim()){ zeilen.push(el.name + ':'); zeilen.push(el.value.trim()); zeilen.push(''); }
+      });
+      fs.querySelectorAll('input[type=radio]:checked').forEach(function(el){
+        zeilen.push(el.name + ': ' + el.value); zeilen.push('');
+      });
+      fs.querySelectorAll('input[type=checkbox]:checked').forEach(function(el){
+        if(!gesehen[el.name]){ gesehen[el.name] = []; }
+        gesehen[el.name].push(el.value);
+      });
+      Object.keys(gesehen).forEach(function(n){ zeilen.push(n + ': ' + gesehen[n].join(', ')); zeilen.push(''); });
+      zeilen.push('');
+    });
+    return zeilen.join('\n');
+  }
+
+  // --- Knöpfe ---
+  var btnMail = document.getElementById('btn-mail');
+  var btnReview = document.getElementById('btn-review');
+  var btnCopy = document.getElementById('btn-copy');
+  var summary = document.getElementById('zusammenfassung');
+  [btnMail, btnReview, btnCopy].forEach(function(b){ if(b) b.style.display = 'inline-flex'; });
+
+  if(btnReview) btnReview.addEventListener('click', function(){
+    summary.textContent = sammeln();
+    summary.classList.toggle('show');
+    btnReview.textContent = summary.classList.contains('show') ? 'Zusammenfassung ausblenden' : 'Erst die Zusammenfassung ansehen';
+  });
+
+  if(btnMail) btnMail.addEventListener('click', function(){
+    var body = sammeln();
+    var url = 'mailto:jay@aivantum.com?subject=' + encodeURIComponent('Aufnahmebogen Wissensweitergabe') + '&body=' + encodeURIComponent(body);
+    if(url.length > 1800){
+      summary.textContent = body;
+      summary.classList.add('show');
+      alert('Ihre Antworten sind ausführlich — wunderbar! Für den Versand: Bitte nutzen Sie den Knopf „Antworten kopieren" und fügen Sie den Text in eine E-Mail an jay@aivantum.com ein.');
+      return;
+    }
+    window.location.href = url;
+  });
+
+  if(btnCopy) btnCopy.addEventListener('click', function(){
+    var body = sammeln();
+    function ok(){ btnCopy.textContent = 'Kopiert ✓ — jetzt in Ihre E-Mail einfügen'; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(body).then(ok, function(){ summary.textContent = body; summary.classList.add('show'); });
+    } else {
+      summary.textContent = body; summary.classList.add('show');
+    }
+  });
+
+  // --- Fortschritts-Chips ---
+  var chips = document.querySelectorAll('#fortschritt a');
+  var ziele = ['teil-a','teil-b','teil-c','teil-d'].map(function(id){ return document.getElementById(id); });
+  if('IntersectionObserver' in window && chips.length === 4){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          var idx = ziele.indexOf(en.target);
+          chips.forEach(function(c,i){ c.classList.toggle('aktiv', i === idx); });
+        }
+      });
+    }, {rootMargin: '-30% 0px -60% 0px'});
+    ziele.forEach(function(z){ if(z) io.observe(z); });
+  }
+})();
+</script>
+</body>
+</html>
